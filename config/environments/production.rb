@@ -80,4 +80,15 @@ Rails.application.configure do
     logger.formatter = config.log_formatter
     config.logger = ActiveSupport::TaggedLogging.new(logger)
   end
+
+  # gmail smtp setting
+  config.action_mailer.smtp_settings = {
+      address:              'smtp.gmail.com',
+      port:                 587,
+      domain:               'gmail.com',
+      user_name:            'dhurbasmtp@gmail.com',
+      password:             'Imaginati0n',
+      authentication:       :plain,
+      enable_starttls_auto: true
+  }
 end

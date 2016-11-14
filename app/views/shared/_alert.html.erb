@@ -1,0 +1,17 @@
+<% if notice %>
+  <div class="alert alert-info alert-dismissible fade in" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+    <div class="container">
+      <i class="glyphicon glyphicon-ok"></i> <%= notice %>
+    </div>
+  </div>
+<% end %>
+
+<% if alert %>
+  <div class="alert alert-warning alert-dismissible fade in" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+    <div class="container">
+      <i class="glyphicon glyphicon-remove"></i> <%= alert %>
+    </div>
+  </div>
+<% end %>
