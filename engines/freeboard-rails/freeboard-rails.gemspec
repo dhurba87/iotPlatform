@@ -9,9 +9,9 @@ Gem::Specification.new do |s|
   s.version     = Freeboard::Rails::VERSION
   s.authors     = ["Dhurba Baral"]
   s.email       = ["dhurba87@gmail.com"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of Freeboard::Rails."
-  s.description = "TODO: Description of Freeboard::Rails."
+  s.homepage    = "http://freeboard.io"
+  s.summary     = "A damn-sexy, open source real-time dashboard builder for IOT and other web mashups."
+  s.description = "A damn-sexy, open source real-time dashboard builder for IOT and other web mashups. A free open-source alternative to Geckoboard. http://freeboard.io"
   s.license     = "MIT"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
