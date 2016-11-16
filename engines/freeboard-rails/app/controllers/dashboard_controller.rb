@@ -1,7 +1,7 @@
 class DashboardController < ApplicationController
   before_action :dashboard_params, only: [:create]
   before_action :authenticate_user!, except: [:show]
-  before_action :set_dashboard, only: [:destroy, :show]
+  before_action :set_dashboard, only: [:destroy]
 
   def index
     @dashboards = Dashboard.where(user: current_user).reverse
@@ -19,11 +19,12 @@ class DashboardController < ApplicationController
   end
 
   def show
+    @dashboard = Dashboard.find(params[:id])
     # check visibility of dashboard
     if @dashboard.visibility.to_s == 'private'
-      # should be logged in user
-    else
-      # anyone can see this dashboard
+      # user should be logged in and associated with params id
+      authenticate_user!
+      set_dashboard
     end
     render :layout => false
   end
@@ -39,6 +40,6 @@ class DashboardController < ApplicationController
   end
 
   def set_dashboard
-    @dashboard = Dashboard.find(params[:id])
+    @dashboard = Dashboard.where({user: current_user, id: params[:id]})
   end
 end
