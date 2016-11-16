@@ -517,6 +517,7 @@ function FreeboardModel(datasourcePlugins, widgetPlugins, freeboardUI)
 						var textFile = fileReaderEvent.target;
 						var jsonObject = JSON.parse(textFile.result);
 
+						debugger;
 
 						self.loadDashboard(jsonObject);
 						self.setEditing(false);

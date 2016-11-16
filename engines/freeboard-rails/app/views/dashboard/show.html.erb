@@ -2,15 +2,16 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>freeboard</title>
+  <title>My Dashboard</title>
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   <meta name="viewport" content = "width = device-width, initial-scale = 1, user-scalable = no" />
   <link href="<%=request.base_url%>/css/freeboard.min.css" rel="stylesheet" />
-  <script src="<%=request.base_url%>/js/freeboard.thirdparty.min.js"></script>
+  <script src="<%=request.base_url%>/js/freeboard.thirdparty.js"></script>
   <script type="text/javascript">
-    head.js("<%=request.base_url%>/js/freeboard_plugins.min.js",
+    var dashboardData = <%=@dashboard.data.to_json.html_safe %>;
+    head.js("<%=request.base_url%>/js/freeboard_plugins.js",
         // *** Load more plugins here ***
         function(){
           $(function()
@@ -42,7 +43,7 @@
   <div id="admin-bar">
     <div id="admin-menu">
       <div id="board-tools">
-        <h1 id="board-logo" class="title bordered">freeboard</h1>
+        <h1 id="board-logo" class="title bordered">MyBoard</h1>
         <div id="board-actions">
           <ul class="board-toolbar vertical">
             <li data-bind="click: loadDashboardFromLocalFile"><i id="full-screen-icon" class="icon-folder-open icon-white"></i><label id="full-screen">Load Freeboard</label></li>

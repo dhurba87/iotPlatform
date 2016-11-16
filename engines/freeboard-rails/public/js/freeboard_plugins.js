@@ -2876,6 +2876,7 @@ var freeboard = (function()
 
                 freeboard.emit("initialized");
 			}
+			theFreeboardModel.loadDashboard(dashboardData);
 		},
 		newDashboard        : function()
 		{
