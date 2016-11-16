@@ -18,12 +18,12 @@
           @dashboards.each do |d| %>
         <tr>
           <td><%= counter=counter+1 %></td>
-          <td><%= link_to d.name, dashboard_path(d)%></td>
-          <td><label class="label <%=d.visibility.to_s == 'private' ? 'label-danger' : 'label-success' %> >"><%=d.visibility%></label></td>
+          <td><%= link_to d.name, dashboard_path(d), target: '_blank' %></td>
+          <td><label class="label <%=d.visibility.to_s  == 'private' ? 'label-danger' : 'label-success' %> >"><%=d.visibility%></label></td>
           <td>
-            <%= link_to '<i class="glyphicon glyphicon-eye-open"></i>'.html_safe, '#', title: 'View', data:{toggle: 'tooltip'} %>
+            <%= link_to '<i class="glyphicon glyphicon-eye-open"></i>'.html_safe, dashboard_path(d), title: 'View', data:{toggle: 'tooltip'}, target: '_blank' %>
             <%= link_to '<i class="glyphicon glyphicon-edit"></i>'.html_safe, '#', title: 'Edit', data:{toggle: 'tooltip'}  %>
-            <%= link_to '<i class="glyphicon glyphicon-trash"></i>'.html_safe, '#', title: 'Delete', data:{toggle: 'tooltip'}  %>
+            <%= link_to '<i class="glyphicon glyphicon-trash"></i>'.html_safe, dashboard_path(d), title: 'Delete', data:{toggle: 'tooltip'}, :method => 'delete' %>
           </td>
         </tr>
         <% end %>
