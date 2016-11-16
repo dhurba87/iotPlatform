@@ -25,6 +25,7 @@ class DashboardController < ApplicationController
       # user should be logged in and associated with params id
       authenticate_user!
       set_dashboard
+      raise 'Naughty... Naughty...' if @dashboard.nil?
     end
     render :layout => false
   end
@@ -40,6 +41,6 @@ class DashboardController < ApplicationController
   end
 
   def set_dashboard
-    @dashboard = Dashboard.where({user: current_user, id: params[:id]})
+    @dashboard = Dashboard.where({user: current_user, id: params[:id]}).first
   end
 end
