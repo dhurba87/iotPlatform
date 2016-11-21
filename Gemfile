@@ -51,3 +51,4 @@ gem 'devise', '~> 4.2'
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'
 
 gem 'freeboard-rails', path: 'engines/freeboard-rails'
+gem 'awesome_print', '~> 1.7'
