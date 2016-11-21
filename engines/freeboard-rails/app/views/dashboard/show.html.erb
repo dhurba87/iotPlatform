@@ -18,7 +18,8 @@
           $(function()
           { //DOM Ready
             freeboard.initialize(true, function(){
-              freeboard.loadDashboard(dashboardData); // Load dashboard
+              if(dashboardData)
+                freeboard.loadDashboard(dashboardData); // Load dashboard
             });
 
             var hashpattern = window.location.hash.match(/(&|#)source=([^&]+)/);
