@@ -1,7 +1,9 @@
 class DashboardController < ApplicationController
   before_action :dashboard_params, only: [:create]
   before_action :authenticate_user!, except: [:show]
-  before_action :set_dashboard, only: [:destroy]
+  before_action :set_dashboard, only: [:destroy, :update]
+  skip_before_filter :verify_authenticity_token, :only => [:update]
+
 
   def index
     @dashboards = Dashboard.where(user: current_user).reverse
@@ -30,6 +32,20 @@ class DashboardController < ApplicationController
     render :layout => false
   end
 
+  # PATCH/PUT /dashboard/:id.json
+  def update
+
+    p '+++++++++++++++++++++++++++++'
+    p dashboard_params
+    p '__________________________________'
+    if @dashboard.update(dashboard_params)
+      p @dashboard.errors
+      render json: {status: 'success', data: 'test'}
+    else
+      render json: {status: 'error', data: @dashboard.errors }
+    end
+  end
+
   def destroy
     @dashboard.destroy
     redirect_to :dashboard_index, notice: 'Dashboard was successfully destroyed.'
@@ -37,7 +53,7 @@ class DashboardController < ApplicationController
 
   private
   def dashboard_params
-    params.require(:dashboard).permit(:name, :visibility)
+    params.require(:dashboard).permit(:name, :visibility, :data)
   end
 
   def set_dashboard

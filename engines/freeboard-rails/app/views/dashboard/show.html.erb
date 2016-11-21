@@ -31,6 +31,35 @@
               });
             }
 
+            // Save dashboard
+            var myDashboard = freeboard.serialize();
+            setInterval(function() {
+              var myCurrentDashboard = freeboard.serialize();
+              if (JSON.stringify(myDashboard) == JSON.stringify(myCurrentDashboard)) {
+                console.log('Nothing is changed.')
+              }else{
+                console.log('Dashboard has been changed. Please update dashboard');
+                /**
+                 * Update dashboard
+                 */
+                $.ajax({
+                  url: "<%= request.base_url %>/dashboard/<%= @dashboard.id %>",
+                  type: 'PATCH',
+                  data: {
+                    dashboard: {
+                      data: myCurrentDashboard
+                    }
+                  },
+                  cache: false,
+                  success: function(data){
+                    console.log(data);
+                  }
+                });
+
+                myDashboard = myCurrentDashboard;
+              }
+            }, 5000);
+
           });
         });
   </script>
@@ -147,6 +176,5 @@
     </section>
   </li>
 </script>
-
 </body>
 </html>
