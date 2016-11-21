@@ -34,7 +34,7 @@ class DashboardController < ApplicationController
 
   # PATCH/PUT /dashboard/:id.json
   def update
-    dashboard_data = params[:dashboard][:data]
+    dashboard_data = params[:dashboard][:data] # TODO:: use require and permit
     raise 'Naughty.... Naughty...' if @dashboard.nil?
     @dashboard[:data] = dashboard_data.to_hash
     if @dashboard.save
