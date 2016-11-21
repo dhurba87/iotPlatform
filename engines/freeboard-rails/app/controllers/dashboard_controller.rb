@@ -34,13 +34,11 @@ class DashboardController < ApplicationController
 
   # PATCH/PUT /dashboard/:id.json
   def update
-
-    p '+++++++++++++++++++++++++++++'
-    p dashboard_params
-    p '__________________________________'
-    if @dashboard.update(dashboard_params)
-      p @dashboard.errors
-      render json: {status: 'success', data: 'test'}
+    dashboard_data = params[:dashboard][:data]
+    raise 'Naughty.... Naughty...' if @dashboard.nil?
+    @dashboard[:data] = dashboard_data.to_hash
+    if @dashboard.save
+      render json: {status: 'success', data: 'Dashboard was saved.'}
     else
       render json: {status: 'error', data: @dashboard.errors }
     end
@@ -53,7 +51,7 @@ class DashboardController < ApplicationController
 
   private
   def dashboard_params
-    params.require(:dashboard).permit(:name, :visibility, :data)
+    params.require(:dashboard).permit(:name, :visibility)
   end
 
   def set_dashboard

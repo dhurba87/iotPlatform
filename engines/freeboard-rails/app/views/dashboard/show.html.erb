@@ -31,34 +31,31 @@
               });
             }
 
-            // Save dashboard
+            // Save dashboard if user is logged in
+            <% if current_user %>
             var myDashboard = freeboard.serialize();
             setInterval(function() {
               var myCurrentDashboard = freeboard.serialize();
-              if (JSON.stringify(myDashboard) == JSON.stringify(myCurrentDashboard)) {
-                console.log('Nothing is changed.')
-              }else{
-                console.log('Dashboard has been changed. Please update dashboard');
+              if (JSON.stringify(myDashboard) != JSON.stringify(myCurrentDashboard)) {
                 /**
                  * Update dashboard
                  */
                 $.ajax({
                   url: "<%= request.base_url %>/dashboard/<%= @dashboard.id %>",
                   type: 'PATCH',
+                  dataType: "json",
                   data: {
-                    dashboard: {
-                      data: myCurrentDashboard
-                    }
+                    "dashboard" : { data: myCurrentDashboard }
                   },
                   cache: false,
                   success: function(data){
-                    console.log(data);
+                    console.log(data.data);
                   }
                 });
-
                 myDashboard = myCurrentDashboard;
               }
             }, 5000);
+            <% end %>
 
           });
         });
