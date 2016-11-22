@@ -2,8 +2,30 @@
   <div class="row">
     <div class="col-md-12">
       <h2>My Dashboards</h2>
-      <button class="btn btn-primary btn-info pull-right" data-toggle="modal" data-target="#createModal"><i class="glyphicon glyphicon-plus"></i> Create Dashboard</button>
-      <div class="clearfix"></div>
+      <div class="row">
+        <div class="col-md-6 col-md-offset-6">
+          <div id="custom-search-input">
+            <div class="row">
+              <div class="col-sm-8">
+                <div class="input-group col-md-12">
+                  <input type="text" class="form-control" placeholder="Search anything"/>
+                  <span class="input-group-btn">
+                  <button class="btn btn-info" type="button">
+                      <i class="glyphicon glyphicon-search"></i>
+                  </button>
+                </span>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <button class="btn btn-primary btn-primary btn-block" data-toggle="modal" data-target="#createModal">
+                  <i class="glyphicon glyphicon-plus"></i> Create Dashboard
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <br>
 
       <table class="table table-hover table-striped">
@@ -16,16 +38,18 @@
         <%
           counter = 0;
           @dashboards.each do |d| %>
-        <tr>
-          <td><%= counter=counter+1 %></td>
-          <td><%= link_to d.name, dashboard_path(d), target: '_blank' %></td>
-          <td><label class="label <%=d.visibility.to_s  == 'private' ? 'label-danger' : 'label-success' %> >"><%=d.visibility%></label></td>
-          <td>
-            <%= link_to '<i class="glyphicon glyphicon-eye-open"></i>'.html_safe, dashboard_path(d), title: 'View', data:{toggle: 'tooltip'}, target: '_blank' %>
-            <%= link_to '<i class="glyphicon glyphicon-edit"></i>'.html_safe, '#', title: 'Edit', data:{toggle: 'tooltip'}  %>
-            <%= link_to '<i class="glyphicon glyphicon-trash"></i>'.html_safe, dashboard_path(d), title: 'Delete', data:{toggle: 'tooltip'}, :method => 'delete' %>
-          </td>
-        </tr>
+            <tr>
+              <td><%= counter=counter+1 %></td>
+              <td><%= link_to d.name, dashboard_path(d), target: '_blank' %></td>
+              <td>
+                <label class="label <%= d.visibility.to_s == 'private' ? 'label-danger' : 'label-success' %> >"><%= d.visibility %></label>
+              </td>
+              <td>
+                <%= link_to '<i class="glyphicon glyphicon-eye-open"></i>'.html_safe, dashboard_path(d), title: 'View', data: {toggle: 'tooltip'}, target: '_blank' %>
+                <%= link_to '<i class="glyphicon glyphicon-edit"></i>'.html_safe, '#', title: 'Edit', data: {toggle: 'tooltip'} %>
+                <%= link_to '<i class="glyphicon glyphicon-trash"></i>'.html_safe, dashboard_path(d), title: 'Delete', data: {toggle: 'tooltip'}, :method => 'delete' %>
+              </td>
+            </tr>
         <% end %>
       </table>
     </div>
@@ -38,26 +62,27 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">Create Dashboard</h4>
       </div>
       <div class="modal-body">
 
         <table class="table">
-        <%= form_for @dashboard, url: {action: "create"}, html: {class: ""} do |f| %>
+          <%= form_for @dashboard, url: {action: "create"}, html: {class: ""} do |f| %>
               <tr>
                 <td><%= f.label :name %></td>
                 <td><%= f.text_field :name, class: 'form-control' %></td>
               </tr>
               <tr>
                 <td><%= f.label :visibility %></td>
-                <td><%= f.select :visibility, {'Public' => 'public', 'Private' => 'private'}, {},class: 'form-control' %></td>
+                <td><%= f.select :visibility, {'Public' => 'public', 'Private' => 'private'}, {}, class: 'form-control' %></td>
               </tr>
               <tr>
                 <td></td>
                 <td><%= f.submit 'Create', class: 'btn btn-primary' %></td>
               </tr>
-        <% end %>
+          <% end %>
         </table>
 
       </div>

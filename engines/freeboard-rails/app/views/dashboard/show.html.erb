@@ -13,6 +13,9 @@
   <script type="text/javascript">
     var dashboardData = <%=@dashboard.data.to_json.html_safe %>;
     head.js("/assets/freeboard/freeboard_plugins.js",
+        "/assets/thirdparty/linechart.js",
+        "/assets/thirdparty/piechart.js",
+        "/assets/thirdparty/barchart.js",
         // *** Load more plugins here ***
         function(){
           $(function()
